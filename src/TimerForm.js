@@ -10,7 +10,8 @@ export default class TimmerForm extends React.Component
         this.state=
         {
             timerTitle:"",
-            timerstart:0,
+            timerstart:null,
+            timeDiff:null,
             timerValue:0,
             timerRunning:false,
             timerDetails:[]
@@ -30,8 +31,8 @@ export default class TimmerForm extends React.Component
     {
        if(!this.state.timerRunning)
        {
-         const starttime=new Date().toLocaleDateString();
-         this.setState({timerRunning:true});
+         //const starttime=new Date().toLocaleDateString();
+         this.setState({timerRunning:true,timerstart:new Date()});
          this.interval=setInterval(() => {
             this.setState((prevstate)=>(
             {
@@ -46,6 +47,9 @@ export default class TimmerForm extends React.Component
       if(this.state.timerRunning)
         {
              clearInterval(this.interval);
+             const stoptimer=new Date();
+            
+            const timeDiffsec=Math.round((stoptimer-this.state.timerstart)/1000)
              const timerLog={
                 title:this.state.timerTitle,
                 time:this.state.timerValue,
@@ -57,7 +61,9 @@ export default class TimmerForm extends React.Component
                     minute:'2-digit',
                     second:'2-digit',
                     hour12:false
-                })
+                }),
+                timeDiff:`${timeDiffsec}S`
+                
              }
 
              this.setState((prevstate)=>
@@ -68,6 +74,10 @@ export default class TimmerForm extends React.Component
                 timerstart:'',
                 timerDetails:[...prevstate.timerDetails,timerLog]
             }))
+
+            
+
+            
         }
     }
     componentWillUnmount()

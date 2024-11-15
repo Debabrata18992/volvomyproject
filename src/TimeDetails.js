@@ -17,7 +17,8 @@ export default class TimmerDetails extends React.Component
                     <tr>
                         <th>Time Title</th>
                         <th>Time Elapse</th>
-                        <th>Date</th>
+                        <th>Entry Logged Date</th>
+                        <th>Time Diffrence For Timer</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +28,7 @@ export default class TimmerDetails extends React.Component
                             <td>{log.title}</td>
                             <td>{log.time}</td>
                              <td>{log.dateVal}</td> 
+                             <td>{log.timeDiff}</td>
                         </tr>
                     )
                     )}
